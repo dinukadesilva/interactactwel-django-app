@@ -256,7 +256,27 @@ export default {
   components: {FlowoutStreamSubGraph, SwGraph, EtGraph, SedimentYieldGraph, WaterYieldGraph, GwqGraph},
   props: {},
   data() {
-    return {};
+    return {
+    selectedSubBasin: {label: 'Sub-basin: 1', code: '1'},
+      options: [
+        {label: 'Sub-basin: 1', code: '1'},
+        {label: 'Sub-basin: 2', code: '2'},
+        {label: 'Sub-basin: 3', code: '3'},
+        {label: 'Sub-basin: 4', code: '4'},
+        {label: 'Sub-basin: 6', code: '6'},
+        {label: 'Sub-basin: 7', code: '7'},
+        {label: 'Sub-basin: 8', code: '8'},
+        {label: 'Sub-basin: 9', code: '9'},
+        {label: 'Sub-basin: 10', code: '10'},
+        {label: 'Sub-basin: 11', code: '11'},
+        {label: 'Sub-basin: 100', code: '100'},
+        {label: 'Sub-basin: 101', code: '101'},
+        {label: 'Sub-basin: 102', code: '102'},
+        {label: 'Sub-basin: 103', code: '103'},
+        {label: 'Sub-basin: 104', code: '104'},
+        {label: 'Sub-basin: 105', code: '105'},
+      ],
+      };
   },
   watch: {},
   mounted() {
