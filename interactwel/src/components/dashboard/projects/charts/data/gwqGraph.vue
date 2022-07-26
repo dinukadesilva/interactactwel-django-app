@@ -29,9 +29,9 @@ export default {
       JSONData: null,
       datacollection: null,
       graphColors: [
-        "#3d71ff",
-        "#00b3eb",
-        "#61cf94",
+        "#28a745",
+        "#28a745",
+        "#28a745",
       ],
       options: {
         responsive: true,
