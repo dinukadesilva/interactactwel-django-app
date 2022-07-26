@@ -53,7 +53,7 @@
                 <h6 class="baseline-graph-title text-center">
                   Action Plan {{ $route.params.planId }}
                 </h6>
-
+                <nsurq-sub-graph :selected-basin-id="selectedSubBasin.code" v-bind:base-graph="false"></nsurq-sub-graph>
               </b-col>
               <b-col
                   lg="6"
@@ -61,7 +61,7 @@
                 <h6 class="baseline-graph-title text-center">
                   Business as Usual
                 </h6>
-
+                <nsurq-sub-graph :selected-basin-id="selectedSubBasin.code" v-bind:base-graph="true"></nsurq-sub-graph>
               </b-col>
             </b-row>
           </div>
@@ -75,7 +75,7 @@
                 <h6 class="baseline-graph-title text-center">
                   Action Plan {{ $route.params.planId }}
                 </h6>
-
+                <syld-sub-graph :selected-basin-id="selectedSubBasin.code" v-bind:base-graph="false"></syld-sub-graph>
               </b-col>
               <b-col
                   lg="6"
@@ -83,7 +83,7 @@
                 <h6 class="baseline-graph-title text-center">
                   Business as Usual
                 </h6>
-
+                <syld-sub-graph :selected-basin-id="selectedSubBasin.code" v-bind:base-graph="true"></syld-sub-graph>
               </b-col>
             </b-row>
           </div>
@@ -97,7 +97,7 @@
                 <h6 class="baseline-graph-title text-center">
                   Action Plan {{ $route.params.planId }}
                 </h6>
-
+                <perc-sub-graph :selected-basin-id="selectedSubBasin.code" v-bind:base-graph="false"></perc-sub-graph>
               </b-col>
               <b-col
                   lg="6"
@@ -105,7 +105,7 @@
                 <h6 class="baseline-graph-title text-center">
                   Business as Usual
                 </h6>
-
+                <perc-sub-graph :selected-basin-id="selectedSubBasin.code" v-bind:base-graph="true"></perc-sub-graph>
               </b-col>
             </b-row>
           </div>
@@ -119,7 +119,7 @@
                 <h6 class="baseline-graph-title text-center">
                   Action Plan {{ $route.params.planId }}
                 </h6>
-
+                <sw-sub-graph :selected-basin-id="selectedSubBasin.code" v-bind:base-graph="false"></sw-sub-graph>
               </b-col>
               <b-col
                   lg="6"
@@ -127,7 +127,7 @@
                 <h6 class="baseline-graph-title text-center">
                   Business as Usual
                 </h6>
-
+                <sw-sub-graph :selected-basin-id="selectedSubBasin.code" v-bind:base-graph="true"></sw-sub-graph>
               </b-col>
             </b-row>
           </div>
@@ -141,7 +141,7 @@
                 <h6 class="baseline-graph-title text-center">
                   Action Plan {{ $route.params.planId }}
                 </h6>
-
+                <et-sub-graph :selected-basin-id="selectedSubBasin.code" v-bind:base-graph="false"></et-sub-graph>
               </b-col>
               <b-col
                   lg="6"
@@ -149,7 +149,7 @@
                 <h6 class="baseline-graph-title text-center">
                   Business as Usual
                 </h6>
-
+                <et-sub-graph :selected-basin-id="selectedSubBasin.code" v-bind:base-graph="true"></et-sub-graph>
               </b-col>
             </b-row>
           </div>
@@ -163,7 +163,7 @@
                 <h6 class="baseline-graph-title text-center">
                   Action Plan {{ $route.params.planId }}
                 </h6>
-
+                <gwq-sub-graph :selected-basin-id="selectedSubBasin.code" v-bind:base-graph="false"></gwq-sub-graph>
               </b-col>
               <b-col
                   lg="6"
@@ -171,7 +171,7 @@
                 <h6 class="baseline-graph-title text-center">
                   Business as Usual
                 </h6>
-
+                <gwq-sub-graph :selected-basin-id="selectedSubBasin.code" v-bind:base-graph="true"></gwq-sub-graph>
               </b-col>
             </b-row>
           </div>
@@ -185,7 +185,7 @@
                 <h6 class="baseline-graph-title text-center">
                   Action Plan {{ $route.params.planId }}
                 </h6>
-
+                <wyld-sub-graph :selected-basin-id="selectedSubBasin.code" v-bind:base-graph="false"></wyld-sub-graph>
               </b-col>
               <b-col
                   lg="6"
@@ -193,7 +193,7 @@
                 <h6 class="baseline-graph-title text-center">
                   Business as Usual
                 </h6>
-
+                <wyld-sub-graph :selected-basin-id="selectedSubBasin.code" v-bind:base-graph="true"></wyld-sub-graph>
               </b-col>
             </b-row>
           </div>
@@ -207,7 +207,7 @@
               <h6 class="baseline-graph-title text-center">
                 Action Plan {{ $route.params.planId }}
               </h6>
-
+              <precip-sub-graph :selected-basin-id="selectedSubBasin.code" v-bind:base-graph="false"></precip-sub-graph>
             </b-col>
             <b-col
                 lg="6"
@@ -215,7 +215,7 @@
               <h6 class="baseline-graph-title text-center">
                 Business as Usual
               </h6>
-
+              <precip-sub-graph :selected-basin-id="selectedSubBasin.code" v-bind:base-graph="true"></precip-sub-graph>
             </b-col>
           </b-row>
         </div>
@@ -230,14 +230,21 @@
 
 import EventBus from './../../../../event-bus';
 import axios from 'axios';
-import VerticalBarChart from "./lib/VerticalBarChart";
 import LatqSubGraph from "@/components/dashboard/projects/charts/data/latqSubGraph";
+import NsurqSubGraph from "@/components/dashboard/projects/charts/data/nsurqSubGraph";
+import SyldSubGraph from "@/components/dashboard/projects/charts/data/syldSubGraph";
+import PercSubGraph from "@/components/dashboard/projects/charts/data/percSubGraph";
+import SwSubGraph from "@/components/dashboard/projects/charts/data/swSubGraph";
+import EtSubGraph from "@/components/dashboard/projects/charts/data/etSubGraph";
+import GwqSubGraph from "@/components/dashboard/projects/charts/data/gwqSubGraph";
+import WyldSubGraph from "@/components/dashboard/projects/charts/data/wyldSubGraph";
+import PrecipSubGraph from "@/components/dashboard/projects/charts/data/precipSubGraph";
 
 export default {
   name: 'SubBasins',
 
   components: {
-    LatqSubGraph,
+    LatqSubGraph, NsurqSubGraph, SyldSubGraph, PercSubGraph, SwSubGraph, EtSubGraph, GwqSubGraph, WyldSubGraph, PrecipSubGraph
   },
 
   data() {

@@ -225,6 +225,15 @@
                 </div>
               </div>
               <div>
+                <b-form-checkbox
+                    id="checkbox-100"
+                    v-model="stresses_layer_show"
+                    name="checkbox-1"
+                    value="checked"
+                    unchecked-value="unchecked"
+                >
+                  <span style="color: #FFFFFF">stresses and shocks</span>
+                </b-form-checkbox>
                 <a
                   href="#climate"
                   class="list-group-item bg-dark font-weight-bold text-light"
@@ -417,7 +426,7 @@
                 />
               </l-layer-group>
 
-              <climate-scenario-map-layer />
+              <climate-scenario-map-layer v-if="stresses_layer_show == 'checked'"/>
 
               <l-control-scale
                 position="bottomright"
@@ -648,6 +657,7 @@ export default {
       selectedMapType: 'terrain_map',
       selectedClimateScenario: 'NUM_DR_sub',
       sub_basins_layer_show: null,
+      stresses_layer_show: 'unchecked',
       sub_basins_drought_layer_show: 'checked',
       streams_layer_show: 'checked',
       reservoirs_layer_show: 'checked',

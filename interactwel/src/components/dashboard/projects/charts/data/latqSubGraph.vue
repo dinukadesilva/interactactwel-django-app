@@ -10,7 +10,6 @@
 <script>
 import axios from 'axios';
 import VerticalBarChart from "../lib/VerticalBarChart";
-import EventBus from "@/event-bus";
 
 export default {
   name: 'latqSubGraph',

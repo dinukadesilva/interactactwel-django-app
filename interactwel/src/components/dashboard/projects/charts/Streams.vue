@@ -5,7 +5,7 @@
   >
     <div class="card-body no-padding">
       <b-tabs card>
-        <b-tab title="Average daily streamflow out of reach during time step">
+        <b-tab title="Stream Flow">
           <div class="card-body">
             <div class="card-body">
               <b-row>
@@ -16,10 +16,7 @@
                   <h6 class="baseline-graph-title text-center">
                     Action Plan {{ $route.params.planId }}
                   </h6>
-                  <img
-                      class="img-fluid"
-                      src="../../../../assets/graph-placeholder.png"
-                  >
+                  <flowout-stream-sub-graph :selected-basin-id="selectedSubBasin.code" v-bind:base-graph="false"></flowout-stream-sub-graph>
                 </b-col>
                 <b-col
                     lg="6"
@@ -28,10 +25,7 @@
                   <h6 class="baseline-graph-title text-center">
                     Business as Usual
                   </h6>
-                  <img
-                      class="img-fluid"
-                      src="../../../../assets/graph-placeholder.png"
-                  >
+                  <flowout-stream-sub-graph :selected-basin-id="selectedSubBasin.code" v-bind:base-graph="true"></flowout-stream-sub-graph>
                 </b-col>
               </b-row>
             </div>
@@ -240,9 +234,10 @@ import WaterYieldGraph from "@/components/dashboard/projects/charts/data/waterYi
 import SedimentYieldGraph from "@/components/dashboard/projects/charts/data/sedimentYieldGraph";
 import EtGraph from "@/components/dashboard/projects/charts/data/etGraph";
 import SwGraph from "@/components/dashboard/projects/charts/data/swGraph";
+import FlowoutStreamSubGraph from "@/components/dashboard/projects/charts/data/flowoutStreamSubGraph";
 export default {
   name: 'Actions',
-  components: {SwGraph, EtGraph, SedimentYieldGraph, WaterYieldGraph, GwqGraph},
+  components: {FlowoutStreamSubGraph, SwGraph, EtGraph, SedimentYieldGraph, WaterYieldGraph, GwqGraph},
   props: {},
   data() {
     return {};
