@@ -3,6 +3,22 @@
     id="graph"
     class="card"
   >
+  <div class="card-header">
+      <div class="row">
+        <div class="col-8">
+          <strong>Sub-basins</strong>
+        </div>
+        <div class="col-4">
+          <div class="form-group">
+            <v-select
+              :options="options"
+              v-model="selectedSubBasin"
+            >
+            </v-select>
+          </div>
+        </div>
+      </div>
+    </div>
     <div class="card-body no-padding">
       <b-tabs card>
         <b-tab title="Stream Flow">
