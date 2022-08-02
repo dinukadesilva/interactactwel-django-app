@@ -29,7 +29,7 @@ export default {
       JSONData: null,
       datacollection: null,
       graphColors: [
-        "#00b3eb"
+        "#28a745"
       ],
       options: {
         responsive: true,
