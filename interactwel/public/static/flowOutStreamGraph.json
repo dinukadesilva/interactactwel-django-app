@@ -2,8 +2,7 @@
   "Data Type": "FLOW_OUT_stream_year",
   "Description": "Average daily streamflow out of reach during time step",
   "y-axis": "Streamflow (m3/s)",
-  "Legend": [],
-  "Labels": [
+  "Legend": [
     "1983",
     "1984",
     "1985",
