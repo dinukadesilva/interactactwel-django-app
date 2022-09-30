@@ -12,7 +12,7 @@ import axios from 'axios';
 import VerticalBarChart from "../lib/VerticalBarChart";
 
 export default {
-  name: 'flowoutStreamSubGraph',
+  name: 'totpStreamSubGraph',
   components: {
     VerticalBarChart,
   },
@@ -35,7 +35,7 @@ export default {
         responsive: true,
         title: {
           display: false,
-          text: 'Average daily streamflow out of reach during time step',
+          text: 'Total Phosphorus',
         },
         tooltips: {
           mode: 'point',
@@ -59,7 +59,7 @@ export default {
             stacked: false,
             scaleLabel: {
               display: true,
-              labelString: 'm3/s',
+              labelString: 'kg',
             },
           }],
         },
@@ -73,7 +73,7 @@ export default {
   },
 
   created() {
-    axios.get("/static/flowOutStreamGraph.json").then(response => {
+    axios.get("/static/totpStreamGraph.json").then(response => {
       this.JSONData = response.data;
       this.buildDataCollection(this.JSONData, this.planId);
     });
