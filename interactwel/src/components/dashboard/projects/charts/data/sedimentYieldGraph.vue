@@ -30,8 +30,6 @@ export default {
       datacollection: null,
       graphColors: [
         "#28a745",
-        "#28a745",
-        "#28a745",
       ],
       options: {
         responsive: true,
