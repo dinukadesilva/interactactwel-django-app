@@ -42,7 +42,7 @@
     "sass": "^1.54.6",
     "sass-loader": "^10",
     "vue-template-compiler": "^2.6.10",
-    "webpack": "^4.46.0",
+    "webpack": "~4.36.0",
     "webpack-bundle-tracker": "^0.4.2-beta"
   },
   "eslintConfig": {
