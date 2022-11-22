@@ -129,7 +129,7 @@
     <b-card v-if="projects">
       <b-card-body title="You don't have any invited projects">
         <b-card-text>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque luctus purus sit amet massa hendrerit semper at eu dui.
+          These are the list of projects you are invited to participate in.
         </b-card-text>
       </b-card-body>
     </b-card>

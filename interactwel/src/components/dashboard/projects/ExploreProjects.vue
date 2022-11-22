@@ -140,7 +140,7 @@
     <b-card v-show="">
       <b-card-body title="You don't have any projects to explore">
         <b-card-text>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque luctus purus sit amet massa hendrerit semper at eu dui.
+          A list of Project will be available in the pan when you have created some projects.
         </b-card-text>
       </b-card-body>
     </b-card>

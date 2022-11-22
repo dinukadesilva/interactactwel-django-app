@@ -62,7 +62,7 @@
       <b-card v-show="">
         <b-card-body title="You don't have access to any projects">
           <b-card-text>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque luctus purus sit amet massa hendrerit semper at eu dui.
+            Welcome, If there is a list of project then you have access but if there is no link, It means that the access to the projects have not be granted.
           </b-card-text>
         </b-card-body>
       </b-card>
