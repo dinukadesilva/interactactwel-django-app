@@ -1,20 +1,24 @@
 from django.contrib.auth.models import User, Group
 from rest_framework import serializers
+import json
 
-from .models import Subbasin, InteractwelUser, InteractwelRole, InteractwelAdaptationStory, \
+from .models import Subbasin, InteractwelUser, InteractwelRole, InteractwelUserRole, InteractwelAdaptationStory, \
 InteractwelInstructionalVideo, InteractwelDocumentation, InteractwelGroup, \
 InteractwelGroupRoleMapping, InteractwelGroupMembership, InteractwelEvent, \
 InteractwelEventAttendance, InteractwelInvitation, InteractwelProject, InteractwelProjectUser, \
 InteractwelPlan, InteractwelFeedback, InteractwelGoal, InteractwelActor, InteractwelAction, \
 InteractwelQuestion, InteractwelProjectGoal, InteractwelProjectActor, InteractwelProjectAction, \
-InteractwelProjectQuestion, InteractwelProjectPlan
+InteractwelProjectQuestion, InteractwelProjectPlan, InteractwelProjectData, InteractwelFeedbackAnswer, \
+InteractwelPlanActorActions, InteractwelProjectJoinRequest, InteractwelSelectedPlan
 
 class SubbasinSerializer(serializers.ModelSerializer):
 
     detail_json = serializers.JSONField()
+    basline_json = serializers.JSONField()
+
     class Meta:
         model = Subbasin
-        fields = ("id", "detail_json")
+        fields = ("id", "subbasin_type", "project_id", "detail_json", "basline_json")
 
 ################# User Management ##############################################
 ################################################################################
@@ -27,6 +31,11 @@ class InteractwelUserSerializer(serializers.ModelSerializer):
 class InteractwelRoleSerializer(serializers.ModelSerializer):
     class Meta:
         model = InteractwelRole
+        fields = '__all__'
+
+class InteractwelUserRoleSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = InteractwelUserRole
         fields = '__all__'
 
 class InteractwelGroupSerializer(serializers.ModelSerializer):
@@ -93,14 +102,39 @@ class InteractwelProjectUserSerializer(serializers.ModelSerializer):
         model = InteractwelProjectUser
         fields = '__all__'
 
+class InteractwelPlanActorActionsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = InteractwelPlanActorActions
+        fields = '__all__'
+
+class InteractwelSelectedPlanSerializer(serializers.ModelSerializer):
+    action_mapping = InteractwelPlanActorActionsSerializer(source='interactwelplanactoractions_set', many=True, required=False)
+    project_id = serializers.ReadOnlyField(source="plan_id.project_id.project_id")
+    class Meta:
+        model = InteractwelSelectedPlan
+        fields = ("selected_plan_id", "timestamp", "user_id", "goals", "action_mapping", "plan_id", "project_id")
+        extra_kwargs = {'goals': {'required': False}, 'action_mapping': {'required': False}}
+
 class InteractwelPlanSerializer(serializers.ModelSerializer):
     class Meta:
         model = InteractwelPlan
         fields = '__all__'
 
+class InteractwelFeedbackAnswerSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = InteractwelFeedbackAnswer
+        fields = '__all__'
+
 class InteractwelFeedbackSerializer(serializers.ModelSerializer):
+    feedback_answers = InteractwelFeedbackAnswerSerializer(many=True, required=False)
     class Meta:
         model = InteractwelFeedback
+        fields = '__all__'
+        extra_kwargs = {'comments': {'required': False}, 'rating': {'required': False}}
+
+class InteractwelProjectDataSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = InteractwelProjectData
         fields = '__all__'
 
 ########################### Goals Actors Actions Questions #####################
@@ -122,7 +156,30 @@ class InteractwelActionSerializer(serializers.ModelSerializer):
         model = InteractwelAction
         fields = '__all__'
 
+class StoredJSONField(serializers.JSONField):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+    def to_representation(self, value):
+        try:
+            if value:
+                print(value)
+                return json.loads(value)
+            else:
+                return value
+        except Exception:
+            return value
+
+    def to_internal_value(self, data):
+        try:
+            return json.dumps(data)
+        except (TypeError, ValueError):
+            self.fail('invalid')
+
 class InteractwelQuestionSerializer(serializers.ModelSerializer):
+
+    possible_answers = StoredJSONField()
+
     class Meta:
         model = InteractwelQuestion
         fields = '__all__'
@@ -153,4 +210,11 @@ class InteractwelProjectQuestionSerializer(serializers.ModelSerializer):
 class InteractwelProjectPlanSerializer(serializers.ModelSerializer):
     class Meta:
         model = InteractwelProjectPlan
+        fields = '__all__'
+
+class InteractwelProjectJoinRequestSerializer(serializers.ModelSerializer):
+    project = InteractwelProjectSerializer(source='project_id', many=False, required=True)
+    user = InteractwelUserSerializer(source='user_id', many=False, required=True)
+    class Meta:
+        model = InteractwelProjectJoinRequest
         fields = '__all__'

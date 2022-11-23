@@ -1,176 +1,371 @@
 <template>
-    <div id="graph" class="card">
-        <div class="card-header">
-            <span v-on:click="dismiss" class="close">Close</span>
-            <div class="row">
-                <div class="col-8"><strong>Sub-basins</strong></div>
-                <div class="col-4"><div class="form-group">
-                    <select class="form-control form-control-sm" v-model="selected" @change="changeBasin">
-                        <option v-for="option in options" v-bind:key="option.value" v-bind:value="option.value">{{ option.text }}</option>
-                    </select>
-                </div></div>
-            </div>
+  <div
+    id="graph"
+    class="card"
+  >
+    <div class="card-header">
+      <div class="row">
+        <div class="col-8">
+          <strong>Sub-basins</strong>
         </div>
-        <div class="card-body no-padding">
-            <b-tabs card>
-                <b-tab title="Irrigation" active>
-                    <div class="card-body">
-                        <vertical-bar-chart :chart-data="datacollection" :options="optionsirr" :width="5"
-                                    :height="3"></vertical-bar-chart>
-                    </div>
-                </b-tab>
-                <b-tab title="Water Rights">
-                    <div class="card-body">
-                        <img class="img-fluid" src="../../../../assets/graph-placeholder.png"/>
-                    </div>
-                </b-tab>
-                <b-tab title="Crop yield">
-                    <div class="card-body">
-                    <img class="img-fluid" src="../../../../assets/graph-placeholder.png"/>
-                    </div>
-                </b-tab>
-                <b-tab title="Groundwater Recharge">
-                    <div class="card-body">
-                        <img class="img-fluid" src="../../../../assets/graph-placeholder.png"/>
-                    </div>
-                </b-tab>
-                <b-tab title="N fertilizer">
-                    <div class="card-body">
-                        <img class="img-fluid" src="../../../../assets/graph-placeholder.png"/>
-                    </div>
-                </b-tab>
-            </b-tabs>
+        <div class="col-4">
+          <div class="form-group">
+            <v-select
+              :options="options"
+              v-model="selectedSubBasin"
+            >
+            </v-select>
+          </div>
         </div>
+      </div>
     </div>
-</template>
+    <div class="card-body no-padding">
+      <b-tabs card>
+        <b-tab title="NO3 - Lateral Flow"
+               active>
+          <div class="card-body">
+            <b-row>
+              <b-col
+                lg="6"
+              >
+                <h6 class="baseline-graph-title text-center">
+                  Action Plan {{ $route.params.planId }}
+                </h6>
+            <latq-sub-graph :selected-basin-id="selectedSubBasin.code" v-bind:base-graph="false"></latq-sub-graph>
+              </b-col>
+              <b-col
+                lg="6"
+              >
+                <h6 class="baseline-graph-title text-center">
+                  Business as Usual
+                </h6>
+                <latq-sub-graph :selected-basin-id="selectedSubBasin.code" v-bind:base-graph="true"></latq-sub-graph>
+              </b-col>
+            </b-row>
+          </div>
+        </b-tab>
+        <b-tab title="NO3 - Surface Runoff">
+          <div class="card-body">
+            <b-row>
+              <b-col
+                  lg="6"
+              >
+                <h6 class="baseline-graph-title text-center">
+                  Action Plan {{ $route.params.planId }}
+                </h6>
+                <nsurq-sub-graph :selected-basin-id="selectedSubBasin.code" v-bind:base-graph="false"></nsurq-sub-graph>
+              </b-col>
+              <b-col
+                  lg="6"
+              >
+                <h6 class="baseline-graph-title text-center">
+                  Business as Usual
+                </h6>
+                <nsurq-sub-graph :selected-basin-id="selectedSubBasin.code" v-bind:base-graph="true"></nsurq-sub-graph>
+              </b-col>
+            </b-row>
+          </div>
+        </b-tab>
+        <b-tab title="Sediment Yield">
+          <div class="card-body">
+            <b-row>
+              <b-col
+                  lg="6"
+              >
+                <h6 class="baseline-graph-title text-center">
+                  Action Plan {{ $route.params.planId }}
+                </h6>
+                <syld-sub-graph :selected-basin-id="selectedSubBasin.code" v-bind:base-graph="false"></syld-sub-graph>
+              </b-col>
+              <b-col
+                  lg="6"
+              >
+                <h6 class="baseline-graph-title text-center">
+                  Business as Usual
+                </h6>
+                <syld-sub-graph :selected-basin-id="selectedSubBasin.code" v-bind:base-graph="true"></syld-sub-graph>
+              </b-col>
+            </b-row>
+          </div>
+        </b-tab>
+        <b-tab title="Percolation to Aquifers">
+          <div class="card-body">
+            <b-row>
+              <b-col
+                  lg="6"
+              >
+                <h6 class="baseline-graph-title text-center">
+                  Action Plan {{ $route.params.planId }}
+                </h6>
+                <perc-sub-graph :selected-basin-id="selectedSubBasin.code" v-bind:base-graph="false"></perc-sub-graph>
+              </b-col>
+              <b-col
+                  lg="6"
+              >
+                <h6 class="baseline-graph-title text-center">
+                  Business as Usual
+                </h6>
+                <perc-sub-graph :selected-basin-id="selectedSubBasin.code" v-bind:base-graph="true"></perc-sub-graph>
+              </b-col>
+            </b-row>
+          </div>
+        </b-tab>
+        <b-tab title="Soil Water">
+          <div class="card-body">
+            <b-row>
+              <b-col
+                  lg="6"
+              >
+                <h6 class="baseline-graph-title text-center">
+                  Action Plan {{ $route.params.planId }}
+                </h6>
+                <sw-sub-graph :selected-basin-id="selectedSubBasin.code" v-bind:base-graph="false"></sw-sub-graph>
+              </b-col>
+              <b-col
+                  lg="6"
+              >
+                <h6 class="baseline-graph-title text-center">
+                  Business as Usual
+                </h6>
+                <sw-sub-graph :selected-basin-id="selectedSubBasin.code" v-bind:base-graph="true"></sw-sub-graph>
+              </b-col>
+            </b-row>
+          </div>
+        </b-tab>
+        <b-tab title="Evapotranspiration">
+          <div class="card-body">
+            <b-row>
+              <b-col
+                  lg="6"
+              >
+                <h6 class="baseline-graph-title text-center">
+                  Action Plan {{ $route.params.planId }}
+                </h6>
+                <et-sub-graph :selected-basin-id="selectedSubBasin.code" v-bind:base-graph="false"></et-sub-graph>
+              </b-col>
+              <b-col
+                  lg="6"
+              >
+                <h6 class="baseline-graph-title text-center">
+                  Business as Usual
+                </h6>
+                <et-sub-graph :selected-basin-id="selectedSubBasin.code" v-bind:base-graph="true"></et-sub-graph>
+              </b-col>
+            </b-row>
+          </div>
+        </b-tab>
+        <b-tab title="Groundwater to Stream">
+          <div class="card-body">
+            <b-row>
+              <b-col
+                  lg="6"
+              >
+                <h6 class="baseline-graph-title text-center">
+                  Action Plan {{ $route.params.planId }}
+                </h6>
+                <gwq-sub-graph :selected-basin-id="selectedSubBasin.code" v-bind:base-graph="false"></gwq-sub-graph>
+              </b-col>
+              <b-col
+                  lg="6"
+              >
+                <h6 class="baseline-graph-title text-center">
+                  Business as Usual
+                </h6>
+                <gwq-sub-graph :selected-basin-id="selectedSubBasin.code" v-bind:base-graph="true"></gwq-sub-graph>
+              </b-col>
+            </b-row>
+          </div>
+        </b-tab>
+        <b-tab title="Water Yield">
+          <div class="card-body">
+            <b-row>
+              <b-col
+                  lg="6"
+              >
+                <h6 class="baseline-graph-title text-center">
+                  Action Plan {{ $route.params.planId }}
+                </h6>
+                <wyld-sub-graph :selected-basin-id="selectedSubBasin.code" v-bind:base-graph="false"></wyld-sub-graph>
+              </b-col>
+              <b-col
+                  lg="6"
+              >
+                <h6 class="baseline-graph-title text-center">
+                  Business as Usual
+                </h6>
+                <wyld-sub-graph :selected-basin-id="selectedSubBasin.code" v-bind:base-graph="true"></wyld-sub-graph>
+              </b-col>
+            </b-row>
+          </div>
+        </b-tab>
+        <b-tab title="Precipitation ">
+        <div class="card-body">
+          <b-row>
+            <b-col
+                lg="6"
+            >
+              <h6 class="baseline-graph-title text-center">
+                Action Plan {{ $route.params.planId }}
+              </h6>
+              <precip-sub-graph :selected-basin-id="selectedSubBasin.code" v-bind:base-graph="false"></precip-sub-graph>
+            </b-col>
+            <b-col
+                lg="6"
+            >
+              <h6 class="baseline-graph-title text-center">
+                Business as Usual
+              </h6>
+              <precip-sub-graph :selected-basin-id="selectedSubBasin.code" v-bind:base-graph="true"></precip-sub-graph>
+            </b-col>
+          </b-row>
+        </div>
+      </b-tab>
 
+      </b-tabs>
+    </div>
+  </div>
+</template>
 
 <script>
 
-    import EventBus from './../../../../event-bus';
-    import axios from 'axios';
-    import VerticalBarChart from "./lib/VerticalBarChart";
+import EventBus from './../../../../event-bus';
+import axios from 'axios';
+import LatqSubGraph from "@/components/dashboard/projects/charts/data/latqSubGraph";
+import NsurqSubGraph from "@/components/dashboard/projects/charts/data/nsurqSubGraph";
+import SyldSubGraph from "@/components/dashboard/projects/charts/data/syldSubGraph";
+import PercSubGraph from "@/components/dashboard/projects/charts/data/percSubGraph";
+import SwSubGraph from "@/components/dashboard/projects/charts/data/swSubGraph";
+import EtSubGraph from "@/components/dashboard/projects/charts/data/etSubGraph";
+import GwqSubGraph from "@/components/dashboard/projects/charts/data/gwqSubGraph";
+import WyldSubGraph from "@/components/dashboard/projects/charts/data/wyldSubGraph";
+import PrecipSubGraph from "@/components/dashboard/projects/charts/data/precipSubGraph";
 
-    export default {
-        name: 'SubBasins',
+export default {
+  name: 'SubBasins',
 
-        components: {
-           VerticalBarChart
+  components: {
+    LatqSubGraph, NsurqSubGraph, SyldSubGraph, PercSubGraph, SwSubGraph, EtSubGraph, GwqSubGraph, WyldSubGraph, PrecipSubGraph
+  },
+
+  data() {
+    return {
+      selectedSubBasin: {label: 'Sub-basin: 1', code: '1'},
+      planName: 'Adaptation Plan 1',
+      JSONData: null,
+      options: [
+        {label: 'Sub-basin: 1', code: '1'},
+        {label: 'Sub-basin: 2', code: '2'},
+        {label: 'Sub-basin: 3', code: '3'},
+        {label: 'Sub-basin: 4', code: '4'},
+        {label: 'Sub-basin: 6', code: '6'},
+        {label: 'Sub-basin: 7', code: '7'},
+        {label: 'Sub-basin: 8', code: '8'},
+        {label: 'Sub-basin: 9', code: '9'},
+        {label: 'Sub-basin: 10', code: '10'},
+        {label: 'Sub-basin: 11', code: '11'},
+        {label: 'Sub-basin: 100', code: '100'},
+        {label: 'Sub-basin: 101', code: '101'},
+        {label: 'Sub-basin: 102', code: '102'},
+        {label: 'Sub-basin: 103', code: '103'},
+        {label: 'Sub-basin: 104', code: '104'},
+        {label: 'Sub-basin: 105', code: '105'},
+      ],
+      datacollection: null,
+      graphColors: [
+        "#3d71ff",
+        "#00b3eb",
+        "#61cf94",
+      ],
+      optionsirr: {
+        responsive: true,
+        title: {
+          display: true,
+          text: 'Irrigation - Yearly totals per water source',
         },
-
-        data() {
-            return {
-                selected: '1',
-                selectedBasinID: '1',
-                planName: 'Adaptation Plan 1',
-                JSONData: null,
-                options: [
-                    {text: 'Sub-basin: 1', value: '1'},
-                    {text: 'Sub-basin: 2', value: '2'},
-                    {text: 'Sub-basin: 3', value: '3'},
-                    {text: 'Sub-basin: 4', value: '4'},
-                    {text: 'Sub-basin: 5', value: '5'}
-                ],
-                datacollection: null,
-                graphColors: [
-                    "#3d71ff",
-                    "#00b3eb",
-                    "#61cf94"
-                ],
-                optionsirr: {
-                    responsive: true,
-                    title: {
-                        display: true,
-                        text: 'Irrigation - Yearly totals per water source'
-                    },
-                    tooltips: {
-                        mode: 'point',
-                        intersect: false,
-                    },
-                    hover: {
-                        mode: 'nearest',
-                        intersect: true
-                    },
-                    scales: {
-                        xAxes: [{
-                            display: true,
-                            stacked: false,
-                            scaleLabel: {
-                                display: true,
-                                labelString: 'Years'
-                            }
-                        }],
-                        yAxes: [{
-                            display: true,
-                            stacked: false,
-                            scaleLabel: {
-                                display: true,
-                                labelString: 'acre-ft'
-                            }
-                        }]
-                    }
-                }
-            };
+        tooltips: {
+          mode: 'point',
+          intersect: false,
         },
-        computed: {},
-
-        mounted() {
-            let $this = this;
-            EventBus.$on('CLICK_ITEM_SIDEBAR', function (planName) {
-                $this.planName = planName;
-                $this.buildDataCollection($this.JSONData, $this.planName, $this.selectedBasinID)
-            });
-
+        hover: {
+          mode: 'nearest',
+          intersect: true,
         },
-
-        created() {
-            axios.get("/static/BASIN_Irrigation_basins_data.json").then(response => {
-                this.JSONData = response.data;
-                this.buildDataCollection(this.JSONData, this.planName, this.selectedBasinID);
-            })
-        },
-
-        methods: {
-            dismiss() {
-                EventBus.$emit('CLOSE');
+        scales: {
+          xAxes: [{
+            display: true,
+            stacked: false,
+            scaleLabel: {
+              display: true,
+              labelString: 'Years',
             },
-
-            buildDataCollection(data, adaptationPlan, basinID) {
-                this.datacollection = {};
-                this.datacollection.labels = [];
-                for (let legend in data.Legend) {
-                    this.datacollection.labels.push(data.Legend[legend]);
-                }
-                this.datacollection.datasets = [];
-                let i= 0;
-                for (let dataIndex in data.Adaptation_plans[adaptationPlan][basinID]["Data"]) {
-                    let dataPoint = data.Adaptation_plans[adaptationPlan][basinID]["Data"][dataIndex];
-                    let dataset = {};
-                    dataset.label = dataPoint.Name;
-                    dataset.backgroundColor = this.getColor(i++);
-                    dataset.data = [];
-                    for (let dataValue in dataPoint.Data) {
-                        dataset.data.push(dataPoint.Data[dataValue]);
-                    }
-                    this.datacollection.datasets.push(dataset);
-                }
-                i++;
+          }],
+          yAxes: [{
+            display: true,
+            stacked: false,
+            scaleLabel: {
+              display: true,
+              labelString: 'acre-ft',
             },
-
-            getColor(i) {
-                let color;
-                color = this.graphColors[i];
-                return color;
-            },
-
-            changeBasin() {
-                this.selectedBasinID = this.selected;
-                this.buildDataCollection(this.JSONData, this.planName, this.selectedBasinID)
-            },
+          }],
         },
-        //props: ["jsonData"]
+      },
+    };
+  },
+  computed: {},
 
-    }
+  mounted() {
+    let $this = this;
+    EventBus.$on('CLICK_ITEM_SIDEBAR', function(planName) {
+      $this.planName = planName;
+      $this.buildDataCollection($this.JSONData, $this.planName, $this.selectedSubBasin.code);
+    });
+
+  },
+
+  created() {
+    axios.get("/static/BASIN_Irrigation_basins_data.json").then(response => {
+      this.JSONData = response.data;
+      this.buildDataCollection(this.JSONData, this.planName, this.selectedSubBasin.code);
+    });
+  },
+
+  methods: {
+    dismiss() {
+      EventBus.$emit('CLOSE');
+    },
+
+    buildDataCollection(data, adaptationPlan, basinID) {
+      this.datacollection = {};
+      this.datacollection.labels = [];
+      for (let legend in data.Legend) {
+        this.datacollection.labels.push(data.Legend[legend]);
+      }
+      this.datacollection.datasets = [];
+      let i = 0;
+      for (let dataIndex in data.Adaptation_plans[adaptationPlan][basinID]["Data"]) {
+        let dataPoint = data.Adaptation_plans[adaptationPlan][basinID]["Data"][dataIndex];
+        let dataset = {};
+        dataset.label = dataPoint.Name;
+        dataset.backgroundColor = this.getColor(i++);
+        dataset.data = [];
+        for (let dataValue in dataPoint.Data) {
+          dataset.data.push(dataPoint.Data[dataValue]);
+        }
+        this.datacollection.datasets.push(dataset);
+      }
+      i++;
+    },
+
+    getColor(i) {
+      let color;
+      color = this.graphColors[i];
+      return color;
+    },
+
+  },
+  //props: ["jsonData"]
+
+};
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

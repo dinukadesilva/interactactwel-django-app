@@ -20,10 +20,9 @@
     <script>
         var userIsAuthenticated = {{ request.user.is_authenticated|yesno:"true,false" }};
         var user={{request.user.is_authenticated|yesno:"true,false"}};
-         console.log(user);
         $(document).ready(function () {
             if(!userIsAuthenticated){
-                window.location = "http://localhost:8000/auth/login";
+                window.location = "http://interactwel.org/:8000/auth/login";
             }
         });
     </script>

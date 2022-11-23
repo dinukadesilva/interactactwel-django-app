@@ -1,16 +1,16 @@
 <template>
   <div id="app">
-    <router-view></router-view>
+    <router-view />
   </div>
 </template>
 
 <script>
 export default {
-  name: 'app',
+  name: 'App',
   components: {
 
-  }
-}
+  },
+};
 </script>
 
 <style>
@@ -30,12 +30,6 @@ export default {
   .main{
     height: 90vh;
     overflow: auto;
-  }
-
-
-  a {
-    color: #28a645;
-    font-weight: 700;
   }
 
   .nav-pills .nav-link.active, .nav-pills .show>.nav-link {
