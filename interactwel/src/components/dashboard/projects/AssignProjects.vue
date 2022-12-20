@@ -129,7 +129,7 @@
       <b-card v-show>
         <b-card-body title="You don't have access to any projects">
           <b-card-text>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque luctus purus sit amet massa hendrerit semper at eu dui.
+            You have not been given acesss to the projects, You will see a list of projects.
           </b-card-text>
         </b-card-body>
       </b-card>
