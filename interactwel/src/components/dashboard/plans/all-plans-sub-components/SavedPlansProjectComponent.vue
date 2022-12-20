@@ -22,7 +22,8 @@
     <b-card v-if="!plans.length">
       <b-card-body title="You don't have access to any saved plans">
         <b-card-text>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque luctus purus sit amet massa hendrerit semper at eu dui.
+          you can Generate New Plan with assistance from InterACTWEL as well as view details
+          on plans previously saved by you.
         </b-card-text>
       </b-card-body>
     </b-card>
