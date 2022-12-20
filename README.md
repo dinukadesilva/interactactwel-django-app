@@ -16,7 +16,7 @@ python package in the airavata-django-portal's virtual environment:
 ```
 cd ../interactactwel-django-app/
 pip install -r requirements.txt
-python setup.py develop
+pip install -e .
 ```
 
 Note: `python setup.py develop` also builds the Vue JS app.
