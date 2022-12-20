@@ -117,7 +117,7 @@
     <b-card v-show="!projects">
       <b-card-body title="You don't have access to any projects">
         <b-card-text>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque luctus purus sit amet massa hendrerit semper at eu dui.
+          This is where new plans are visualise if access is granted to view them.
         </b-card-text>
       </b-card-body>
     </b-card>
