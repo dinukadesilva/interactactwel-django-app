@@ -129,7 +129,7 @@
           />
         </b-card-text>
         <b-card-text>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque luctus purus sit amet massa hendrerit semper at eu dui. Sed eget hendrerit tortor. Vestibulum ultrices augue eu ante elementum, eget gravida lacus semper. Sed sed lectus augue. Duis ac ex quis magna tristique ullamcorper vel in nisl. Aliquam molestie nibh non orci fringilla gravida. Curabitur id est eu mauris facilisis consectetur a quis felis. Vivamus egestas ex nisl, et viverra sem placerat vitae.
+          This video illustrates the concept of adaptation, and the need for collaboration among the agriculture, water, and energy sectors in order to be resilient to stress in a changing World.
         </b-card-text>
       </b-card-body>
     </b-col>
@@ -160,11 +160,11 @@ export default {
         {
           "Group 1": [
             {
-              title: "InterACTWEL for resilient food, energy, and water sectors in local communities\n",
+              title: "Collaborative Adaptation\n",
               url: "https://www.youtube.com/watch?v=os5Id_58rf4",
             },
-            {title: "Open Channel Flow Concepts", url: "https://www.youtube.com/watch?v=8vmTYmt0Y8Q"},
-            {title: "Culvert Hydraulics", url: "https://www.youtube.com/watch?v=vnXmGyb_hKQ"},
+            // {title: "Open Channel Flow Concepts", url: "https://www.youtube.com/watch?v=8vmTYmt0Y8Q"},
+            // {title: "Culvert Hydraulics", url: "https://www.youtube.com/watch?v=vnXmGyb_hKQ"},
           ],
           "Group 2": [
             {
