@@ -19,7 +19,7 @@
     <b-col cols="9">
       <b-card-body title="Getting Started">
         <b-card-text>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque luctus purus sit amet massa hendrerit semper at eu dui. Sed eget hendrerit tortor. Vestibulum ultrices augue eu ante elementum, eget gravida lacus semper. Sed sed lectus augue. Duis ac ex quis magna tristique ullamcorper vel in nisl. Aliquam molestie nibh non orci fringilla gravida. Curabitur id est eu mauris facilisis consectetur a quis felis. Vivamus egestas ex nisl, et viverra sem placerat vitae.
+          Please contact Dr. Meghna Babbar-Sebens (meghna@oregonstate.edu) if you have questions about InterACTWEL.
         </b-card-text>
       </b-card-body>
     </b-col>
