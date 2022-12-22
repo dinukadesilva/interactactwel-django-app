@@ -33,7 +33,7 @@
     <b-card v-if="!projects">
       <b-card-body title="You don't have any saved plans">
         <b-card-text>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque luctus purus sit amet massa hendrerit semper at eu dui.
+          Plans will show up here when they are saved.
         </b-card-text>
       </b-card-body>
     </b-card>

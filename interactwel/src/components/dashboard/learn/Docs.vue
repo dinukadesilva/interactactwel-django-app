@@ -19,7 +19,7 @@
     <b-col cols="9">
       <b-card-body title="Getting Started">
         <b-card-text>
-          Please contact Dr. Meghna Babbar-Sebens (meghna@oregonstate.edu) if you have questions about InterACTWEL.
+          Click on the tabs on the left to learn more about the different functionalitie in InterACTWEL.
         </b-card-text>
       </b-card-body>
     </b-col>
