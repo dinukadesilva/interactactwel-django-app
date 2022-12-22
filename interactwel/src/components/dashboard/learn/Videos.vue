@@ -119,7 +119,7 @@
       </div>
     </b-col>
     <b-col cols="8">
-      <b-card-body title="Title of the video">
+      <b-card-body title="Collaborative Adaptation">
         <b-card-text>
           <b-embed
             type="iframe"
